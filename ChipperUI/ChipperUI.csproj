@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <Authors>zsotroav</Authors>
+    <Company>zsotroav</Company>
+    <Product>zsotroav's chipper with UI</Product>
+    <Copyright>zsotroav 2021, All rights reserved.</Copyright>
+  </PropertyGroup>
+
+</Project>
