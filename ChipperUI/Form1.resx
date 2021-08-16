@@ -271,10 +271,10 @@
     <value>No</value>
   </data>
   <data name="StripMe.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 20</value>
+    <value>168, 20</value>
   </data>
   <data name="StripMe.Text" xml:space="preserve">
-    <value>Copyright (C) Török Zsombor, 2021</value>
+    <value>Copyright (C) zsotroav, 2021</value>
   </data>
   <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
