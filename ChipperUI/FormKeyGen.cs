@@ -30,7 +30,7 @@ namespace ChipperUI
                     MessageBoxIcon.Error);
                 return;
             }
-            Algorythm.GenKey(TextKeyPass.Text, TextKeyName.Text);
+            Algorithm.GenKey(TextKeyPass.Text, TextKeyName.Text);
             MessageBox.Show($"Key {TextKeyName.Text} was generated successfully.", "Success", MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
             

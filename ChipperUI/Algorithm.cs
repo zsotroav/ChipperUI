@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ChipperUI
 {
-    class Algorythm
+    class Algorithm
     {
         public static List<byte> DataIn = new();
         public static List<byte> DataOut = new();

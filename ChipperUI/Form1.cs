@@ -33,10 +33,10 @@ namespace ChipperUI
 
         private void Encrypt(object sender, EventArgs e)
         {
-            var Input = Algorythm.DataIn.ToArray();
+            var Input = Algorithm.DataIn.ToArray();
             var KeyLoc = Path.Combine(External.MainPath, ComboKey.Text);
-            var ByteEnc = Algorythm.EncryptData(Input, External.LoadBin(KeyLoc));
-            TextBoxOut.Text = Algorythm.EncodeString(ByteEnc);
+            var ByteEnc = Algorithm.EncryptData(Input, External.LoadBin(KeyLoc));
+            TextBoxOut.Text = Algorithm.EncodeString(ByteEnc);
         }
 
         private void LoadFile(object sender, EventArgs e)
@@ -48,8 +48,8 @@ namespace ChipperUI
             if (loc != null && loc != "")
             {
                 var data = External.LoadBin(loc);
-                Algorythm.DataIn = data.ToList();
-                TextBoxIn.Text = Algorythm.EncodeString(data);
+                Algorithm.DataIn = data.ToList();
+                TextBoxIn.Text = Algorithm.EncodeString(data);
 
                 if (OpenDialog.SafeFileName.Length > 9 && OpenDialog.SafeFileName[0..^8] == ".enc.bin")
                     enc = false;
@@ -62,7 +62,7 @@ namespace ChipperUI
 
         private void SaveFile(object sender, EventArgs e)
         {
-            var Output = Algorythm.DataOut.ToArray();
+            var Output = Algorithm.DataOut.ToArray();
             SaveDialog.ShowDialog();
             if (enc)
                 SaveDialog.DefaultExt = ".enc.bin";
@@ -85,12 +85,12 @@ namespace ChipperUI
         private void TextBoxIn_TextChanged(object sender, EventArgs e)
         {
             if (!FromFile)
-                Algorythm.DataIn = Algorythm.EncodeBytes(TextBoxIn.Text).ToList();
+                Algorithm.DataIn = Algorithm.EncodeBytes(TextBoxIn.Text).ToList();
         }
 
         private void ChangeEncoding(object sender, EventArgs e)
         {
-            Algorythm.EncMode = ComboEncoding.Text;
+            Algorithm.EncMode = ComboEncoding.Text;
         }
 
         private void CheckKey(object sender, EventArgs e)
