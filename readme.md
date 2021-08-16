@@ -40,7 +40,7 @@ Decrypt encrypted data using a selected key. As with encryption, the input may c
 
 ## Algorithm
 
-The algorithm is stored in the `Algorithm.cs` with some optimizations. Most of the code is currently static, but this will be updated to object-oriented code in the future.
+The algorithm is stored in the `Algorithm.cs` with some optimizations. Most of the code has been updated to work in a object-oriented manner.
 
 ### Basic concept
 
