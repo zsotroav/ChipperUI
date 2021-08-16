@@ -8,8 +8,15 @@ namespace ChipperUI
 {
     public partial class Form1 : Form
     {
-        public bool enc = true; // true=E flase=D
-        private bool FromFile = false;
+        private readonly AlgorithmInstance _algorithm = new();
+        public bool Enc = true; // true=E false=D
+        private bool _fromFile;
+
+        public string EncMode
+        {
+            get => ComboEncoding.Text;
+            set => ComboEncoding.Text = value;
+        }
 
         public Form1()
         {
@@ -24,37 +31,38 @@ namespace ChipperUI
         public void LoadKeys()
         {
             ComboKey.Items.Clear();
-            string[] KeyFiles = Directory.GetFiles(External.MainPath, "*.key.bin");
-            for (int i = 0; i < KeyFiles.Length; i++)
+            var keyFiles = Directory.GetFiles(External.MainPath, "*.key.bin");
+            foreach (var t in keyFiles)
             {
-                ComboKey.Items.Add(Path.GetFileName(KeyFiles[i]));
+                ComboKey.Items.Add(Path.GetFileName(t));
             }
         }
 
         private void Encrypt(object sender, EventArgs e)
         {
-            var Input = Algorithm.DataIn.ToArray();
-            var KeyLoc = Path.Combine(External.MainPath, ComboKey.Text);
-            var ByteEnc = Algorithm.EncryptData(Input, External.LoadBin(KeyLoc));
-            TextBoxOut.Text = Algorithm.EncodeString(ByteEnc);
+            var input = _algorithm.DataIn.ToArray();
+            var keyLoc = Path.Combine(External.MainPath, ComboKey.Text);
+            var byteEnc = _algorithm.EncryptData(input, External.LoadBin(keyLoc));
+            TextBoxOut.Text = AlgorithmStatic.EncodeString(byteEnc, EncMode);
         }
 
         private void LoadFile(object sender, EventArgs e)
         {
-            FromFile = true;
+            _fromFile = true;
             OpenDialog.ShowDialog();
-            string loc = OpenDialog.FileName;
+            var loc = OpenDialog.FileName;
 
-            if (loc != null && loc != "")
+            if (!string.IsNullOrEmpty(loc))
             {
                 var data = External.LoadBin(loc);
-                Algorithm.DataIn = data.ToList();
-                TextBoxIn.Text = Algorithm.EncodeString(data);
+                _algorithm.DataIn = data.ToList();
+                TextBoxIn.Text = AlgorithmStatic.EncodeString(data, EncMode);
+                var fileName = OpenDialog.SafeFileName;
 
-                if (OpenDialog.SafeFileName.Length > 9 && OpenDialog.SafeFileName[0..^8] == ".enc.bin")
-                    enc = false;
+                if (fileName is { Length: > 9 } && fileName[..^8] == ".enc.bin")
+                    Enc = false;
                 else
-                    enc = true;
+                    Enc = true;
             }
 
             OpenDialog.FileName = "";
@@ -62,16 +70,13 @@ namespace ChipperUI
 
         private void SaveFile(object sender, EventArgs e)
         {
-            var Output = Algorithm.DataOut.ToArray();
+            var output = _algorithm.DataOut.ToArray();
             SaveDialog.ShowDialog();
-            if (enc)
-                SaveDialog.DefaultExt = ".enc.bin";
-            else
-                SaveDialog.DefaultExt = "";
-            string loc = SaveDialog.FileName;
+            SaveDialog.DefaultExt = Enc ? ".enc.bin" : "";
+            var loc = SaveDialog.FileName;
 
-            if (loc != null && loc != "")
-                External.SaveBin(loc, Output);
+            if (!string.IsNullOrEmpty(loc))
+                External.SaveBin(loc, output);
 
             SaveDialog.FileName = "";
         }
@@ -84,13 +89,8 @@ namespace ChipperUI
 
         private void TextBoxIn_TextChanged(object sender, EventArgs e)
         {
-            if (!FromFile)
-                Algorithm.DataIn = Algorithm.EncodeBytes(TextBoxIn.Text).ToList();
-        }
-
-        private void ChangeEncoding(object sender, EventArgs e)
-        {
-            Algorithm.EncMode = ComboEncoding.Text;
+            if (!_fromFile)
+                _algorithm.DataIn = AlgorithmStatic.EncodeBytes(TextBoxIn.Text, EncMode).ToList();
         }
 
         private void CheckKey(object sender, EventArgs e)
@@ -105,15 +105,15 @@ namespace ChipperUI
 
         private void StripKeyExt_Click(object sender, EventArgs e)
         {
-            FromFile = true;
+            _fromFile = true;
             OpenDialogKey.ShowDialog();
-            string Loc = OpenDialogKey.FileName;
+            var loc = OpenDialogKey.FileName;
 
-            if (!File.Exists(Loc))
+            if (!File.Exists(loc))
                 return;
 
-            string FullPath = Path.Combine( External.MainPath, OpenDialogKey.SafeFileName);
-            File.Copy(Loc, FullPath);
+            var fullPath = Path.Combine( External.MainPath, OpenDialogKey.SafeFileName);
+            File.Copy(loc, fullPath);
             LoadKeys();
         }
 

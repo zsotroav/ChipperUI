@@ -173,7 +173,6 @@ namespace ChipperUI
             resources.GetString("ComboEncoding.Items3")});
             resources.ApplyResources(this.ComboEncoding, "ComboEncoding");
             this.ComboEncoding.Name = "ComboEncoding";
-            this.ComboEncoding.SelectedIndexChanged += new System.EventHandler(this.ChangeEncoding);
             // 
             // OpenDialogKey
             // 

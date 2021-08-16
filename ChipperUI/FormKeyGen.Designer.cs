@@ -118,7 +118,6 @@ namespace ChipperUI
             this.Name = "FormKeyGen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Generate new key";
-            this.Load += new System.EventHandler(this.FormKeyGen_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -1,18 +1,17 @@
 ﻿using System;
 using System.IO;
-using System.Text;
 
 namespace ChipperUI
 {
-    class External
+    internal class External
     {
         public static readonly string WritePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         public static readonly string MainPath = Path.Combine(WritePath, "zsotroav", "chipper");
 
-        public static void SaveBin(string loc, byte[] Data)
+        public static void SaveBin(string loc, byte[] data)
         {
-            using FileStream fs = File.Create(loc);
-            fs.Write(Data, 0, Data.Length);
+            using var fs = File.Create(loc);
+            fs.Write(data, 0, data.Length);
             fs.Close();
         }
 
