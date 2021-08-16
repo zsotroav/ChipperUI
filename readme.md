@@ -36,11 +36,11 @@ Encrypt user-inputted data or binary data read from files. During encryption, th
 
 ### Decrypt data
 
-Decrypt encrypted data using a selected key. As with encryption, the input may come from a file or straight from the console. The decrypted data may also be saved to a file.
+Decrypt encrypted data using a selected key. As with encryption, the input may come from a file or from the UI. The decrypted data may also be saved to a file.
 
 ## Algorithm
 
-The algorithm is stored in the `Algorithm.cs` with some optimizations. Most of the code is currently static, but this will be updated to object-oriented code in the future.
+The algorithm is stored in the `Algorithm.cs` with some optimizations. Most of the code has been updated to work in a object-oriented manner.
 
 ### Basic concept
 
