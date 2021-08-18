@@ -48,12 +48,12 @@ The basic concept of the algorithm is to take the binary data of the input and t
 
 ### Code snippet
 
-_from [AlgorithmInstance.cs line 9](https://github.com/zsotroav/ChipperUI/blob/master/ChiperUI/AlgorithmInstance.cs#L9)_
+_from [AlgorithmInstance.cs line 9](ChipperUI/AlgorithmInstance.cs#L9)_
 
 ```cs
 public byte[] EncryptData(byte[] inData, byte[] keyData)
 {
-    DataOut.Clear();
+    List<byte> DataOut = new();
     int x = 0;
     for (int i = 0; i < inData.Length; i++)
     {
