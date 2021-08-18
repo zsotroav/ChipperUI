@@ -48,21 +48,21 @@ The basic concept of the algorithm is to take the binary data of the input and t
 
 ### Code snippet
 
-_from [Algorithm.cs line 14](https://github.com/zsotroav/ChipperUI/blob/master/ChiperUI/Algorithm.cs#L14)_
+_from [AlgorithmInstance.cs line 9](https://github.com/zsotroav/ChipperUI/blob/master/ChiperUI/AlgorithmInstance.cs#L9)_
 
 ```cs
-public static byte[] EncryptData(byte[] InData, byte[] KeyData)
+public byte[] EncryptData(byte[] inData, byte[] keyData)
 {
     DataOut.Clear();
     int x = 0;
-    for (int i = 0; i < InData.Length; i++)
+    for (int i = 0; i < inData.Length; i++)
     {
-        if (KeyData.Length < i - x + 1)
+        if (keyData.Length < i - x + 1)
         {
-            x += KeyData.Length;
+            x += keyData.Length;
         }
 
-        DataOut.Add((byte) (KeyData[i - x] ^ InData[i]));
+        DataOut.Add((byte) (keyData[i - x] ^ inData[i]));
     }
     return DataOut.ToArray();
 }

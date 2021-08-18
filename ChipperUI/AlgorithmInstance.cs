@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
+﻿using System.Collections.Generic;
 
-namespace ChipperUI
+namespace LibChipper
 {
     internal class AlgorithmInstance
     {
-        public List<byte> DataIn = new();
-        public List<byte> DataOut = new();
-
         public byte[] EncryptData(byte[] inData, byte[] keyData)
         {
-            DataOut.Clear();
+            List<byte> DataOut = new();
             int x = 0;
             for (int i = 0; i < inData.Length; i++)
             {
